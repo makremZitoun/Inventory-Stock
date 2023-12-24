@@ -1,1 +1,2 @@
-# Inventory-Stock
+# GestionInventaireStock
+INVENTORY STOCK SPRING_REST REPO v2023
