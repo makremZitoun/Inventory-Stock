@@ -3,7 +3,7 @@ env:
   IMAGE_NAME: makremzitoun/inventory-api
 on:
   push:
-    branches: ['master']
+    branches: ['main']
 
   workflow_dispatch:
 jobs:
