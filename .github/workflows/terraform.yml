@@ -1,0 +1,59 @@
+name: Terraform WF
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+  workflow_dispatch:
+defaults:
+  run:
+    working-directory: ./terraform
+env:
+  IMAGE_NAME: makremzitoun/inventory-api
+  # ARM_CLIENT_ID: '${{ secrets.AZURE_CLIENT_ID }}'
+  # ARM_SUBSCRIPTION_ID: '${{ secrets.AZURE_SUBSCRIPTION_ID }}'
+  # ARM_TENANT_ID: '${{ secrets.AZURE_TENANT_ID }}'
+  # ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
+
+jobs:
+  Build-Java-App-With-Gradle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      # - name: Write SSH PUBLIC Key
+      #   run: echo '${{ secrets.SSH_PUB_KEY }}' > ./azure_key 
+      
+      # - name: Write SSH PRIVATE Key
+        
+      #   run: echo '${{ secrets.SSH_PRV_KEY }}' > ./azure_prv_key 
+        
+      # - name: secure SSH Key
+      #   run: chmod 600 ./azure_prv_key 
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      # - name: Terrform Destroy
+      #   id: destroy
+      #   run: terraform destroy -auto-approve
+
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
+      #   continue-on-error: true
+    
+      - name: Terrform plan
+        id: plan
+        run: terraform plan -auto-approve
+        continue-on-error: true
