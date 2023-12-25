@@ -55,5 +55,5 @@ jobs:
     
       - name: Terrform plan
         id: plan
-        run: terraform plan -auto-approve
+        run: terraform plan -no-color
         continue-on-error: true
