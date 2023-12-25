@@ -16,7 +16,7 @@ env:
   # ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
 
 jobs:
-  Build-Java-App-With-Gradle:
+  Terraform-Steps-Run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
