@@ -13,6 +13,14 @@ terraform {
       version = "3.84.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "rg-tfstate"
+    storage_account_name = "tfstate1612"
+    container_name       = "state-container"
+    key                  = "terraform.tfstate"
+    use_oidc             = true
+  }
 }
 
 provider "azurerm" {
