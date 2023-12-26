@@ -106,11 +106,15 @@ resource "azurerm_virtual_machine" "vms_deployment" {
     environment = "staging"
   }
 }
-
+data "azurerm_public_ip" "vm_pub_ip" {
+    name = azurerm_public_ip.pubsIps.name
+    resource_group_name = azurerm_resource_group.rg_depl.name
+    depends_on = [ azurerm_virtual_machine.vms_deployment ]
+}
 output "password" {
   value = random_string.vms_pwd.result
 }
 
 output "publicIP" {
-  value = azurerm_public_ip.pubsIps.ip_address
+  value = data.azurerm_public_ip.vm_pub_ip.ip_address
 }
