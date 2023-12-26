@@ -69,7 +69,10 @@ resource "azurerm_network_interface" "main" {
     public_ip_address_id          = azurerm_public_ip.pubsIps.id
   }
 }
-
+resource "time_sleep" "await_nic" {
+  depends_on = [ azurerm_network_interface.main ]
+  destroy_duration = "10s"
+}
 resource "azurerm_virtual_machine" "vms_deployment" {
   name                  = var.vms
   location              = var.region

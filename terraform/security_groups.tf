@@ -1,6 +1,7 @@
 resource "azurerm_network_security_group" "sg-depl" {
   resource_group_name = azurerm_resource_group.rg_depl.name
   location            = azurerm_resource_group.rg_depl.location
+  depends_on = [ time_sleep.await_nic,azurerm_network_interface.main ]
   name                = "vm0-sg"
 }
 
