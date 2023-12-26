@@ -45,15 +45,15 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      # - name: Terrform Destroy
-      #   id: destroy
-      #   run: terraform destroy -auto-approve
+      - name: Terrform Destroy
+        id: destroy
+        run: terraform destroy -auto-approve
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
-      #   continue-on-error: true
-    
-      - name: Terrform plan
-        id: plan
-        run: terraform plan -no-color
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
         continue-on-error: true
+    
+      # - name: Terrform plan
+      #   id: plan
+      #   run: terraform plan -no-color
+      #   continue-on-error: true
