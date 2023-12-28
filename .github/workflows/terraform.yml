@@ -31,15 +31,15 @@ jobs:
         id: init
         run: terraform init
 
-      # - name: Write SSH PUBLIC Key
-      #   run: echo '${{ secrets.SSH_PUB_KEY }}' > ./azure_key 
+      - name: Write SSH PUBLIC Key
+        run: echo '${{ secrets.SSH_PUB_KEY }}' > ./azure_key 
       
-      # - name: Write SSH PRIVATE Key
+      - name: Write SSH PRIVATE Key
         
-      #   run: echo '${{ secrets.SSH_PRV_KEY }}' > ./azure_prv_key 
+        run: echo '${{ secrets.SSH_PRV_KEY }}' > ./azure_prv_key 
         
-      # - name: secure SSH Key
-      #   run: chmod 600 ./azure_prv_key 
+      - name: secure SSH Key
+        run: chmod 600 ./azure_prv_key 
 
       - name: Terraform Validate
         id: validate
