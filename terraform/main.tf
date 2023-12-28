@@ -75,6 +75,25 @@ resource "azurerm_virtual_machine" "vms_deployment" {
     environment = "staging"
   }
 }
+resource "null_resource" "provisioner" {
+  depends_on = [azurerm_virtual_machine.vms_deployment]
+  connection {
+    type        = "ssh"
+    user        = "azureuser"
+    host        = data.azurerm_public_ip.vm_pub_ip.ip_address
+    private_key = file("./azure_prv_key")
+    agent       = false
+    timeout     = "10m"
+  }
+  provisioner "file" {
+    source      = "../docker-compose.yml"
+    destination = "/home/azureuser/docker-compose.yml"
+  }
+  provisioner "file" {
+    source      = "../.env"
+    destination = "/home/azureuser/.env"
+  }
+}
 
 output "password" {
   value = random_string.vms_pwd.result
