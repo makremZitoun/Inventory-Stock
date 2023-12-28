@@ -46,7 +46,7 @@ jobs:
         run: terraform validate -no-color
       
       - name: Terrform Refresh 
-        run: terraform refresh -auto-approve
+        run: terraform plan -lock=false
         # run: terraform force-unlock -force
 
       - name: Terrform Destroy
