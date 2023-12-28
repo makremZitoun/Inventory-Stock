@@ -44,6 +44,10 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
+      
+      - name: Terrform Refresh 
+        run: terraform refresh
+        # run: terraform force-unlock -force
 
       - name: Terrform Destroy
         id: destroy
