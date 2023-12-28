@@ -95,6 +95,26 @@ resource "null_resource" "provisioner" {
   }
 }
 
+resource "null_resource" "remote_provionner" {
+
+  connection {
+    type        = "ssh"
+    user        = "azureuser"
+    host        = data.azurerm_public_ip.vm_pub_ip.ip_address
+    private_key = file("./azure_prv_key")
+    agent       = false
+  }
+  provisioner "remote-exec" {
+    #script = "./run.sh"
+    inline = [" until docker --version; do echo 'Waiting for docker to install' && sleep 30; done",
+      "sleep 30",
+    "sudo docker compose up -d"]
+
+  }
+  #  depends_on = [ time_sleep.await-docker ]
+}
+
+
 output "password" {
   value = random_string.vms_pwd.result
 }
