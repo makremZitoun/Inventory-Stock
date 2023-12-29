@@ -63,6 +63,7 @@ resource "azurerm_virtual_machine" "vms_deployment" {
     computer_name  = "azurehost"
     admin_username = "azureuser"
     admin_password = random_string.vms_pwd.result
+    custom_data    = data.template_file.cloud-init.rendered
   }
   os_profile_linux_config {
     disable_password_authentication = false
