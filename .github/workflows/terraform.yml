@@ -29,7 +29,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init -lock=false
+        run: terraform init
 
       - name: Write SSH PUBLIC Key
         run: echo '${{ secrets.SSH_PUB_KEY }}' > ./azure_key 
